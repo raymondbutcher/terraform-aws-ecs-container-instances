@@ -15,6 +15,12 @@ variable "alarms" {
   default = null
 }
 
+variable "ami_pipeline" {
+  description = "Enable this to use AMI deployments in conjunction with the pipeline module."
+  type        = bool
+  default     = false
+}
+
 variable "boot_timeout_seconds" {
   description = "The time allowed for instances to boot before giving up."
   type        = number
@@ -42,6 +48,12 @@ variable "drain_timeout_seconds" {
   default = 60 * 60
 }
 
+variable "image_id" {
+  description = "AMI to use if the AMI pipeline is disabled."
+  type        = string
+  default     = ""
+}
+
 variable "instance_types" {
   description = "The instance types to use and their weights. Set weight to 1 if there is only one instance type. See https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-weighting.html"
   type        = list(object({
@@ -55,15 +67,18 @@ variable "max_size" {
 }
 
 variable "pipeline_auto_deploy" {
-  type = bool
+  type    = bool
+  default = null
 }
 
 variable "pipeline_aws_account_id" {
-  type = string
+  type    = string
+  default = null
 }
 
 variable "pipeline_target_name" {
-  type = string
+  type    = string
+  default = null
 }
 
 variable "spot_instances_policy" {

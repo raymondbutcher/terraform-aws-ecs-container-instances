@@ -27,7 +27,8 @@ module "asg" {
 
   depends_on = [module.boot_instances, module.drain_instances]
 
-  ami_pipeline            = true
+  ami_pipeline            = var.ami_pipeline
+  image_id                = var.image_id
   instance_profile_arn    = module.instance_profile.profile_arn
   instance_types          = var.instance_types
   max_size                = var.max_size
