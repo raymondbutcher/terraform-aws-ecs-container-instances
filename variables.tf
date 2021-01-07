@@ -22,6 +22,12 @@ variable "boot_timeout_seconds" {
   default = 60 * 15
 }
 
+variable "cloudwatch_agent" {
+  description = "Run CloudWatch Agent as a daemon service."
+  type        = bool
+  default     = false
+}
+
 variable "cluster_name" {
   type = string
 }

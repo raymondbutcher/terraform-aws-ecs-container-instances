@@ -94,6 +94,8 @@ module "drain_instances" {
 }
 
 module "cloudwatch_agent" {
+  count = var.cloudwatch_agent ? 1 : 0
+
   source = "./modules/cloudwatch-agent-daemon-service"
 
   cluster_name = var.cluster_name
