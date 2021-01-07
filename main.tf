@@ -27,20 +27,21 @@ module "asg" {
 
   depends_on = [module.boot_instances, module.drain_instances]
 
-  ami_pipeline            = var.ami_pipeline
-  image_id                = var.image_id
-  instance_profile_arn    = module.instance_profile.profile_arn
-  instance_types          = var.instance_types
-  max_size                = var.max_size
-  min_size                = 0 # ECS capacity provider auto scaling will scale up from zero
-  name                    = local.asg_name
-  pipeline_target_name    = var.pipeline_target_name
-  pipeline_auto_deploy    = var.pipeline_auto_deploy
-  pipeline_aws_account_id = var.pipeline_aws_account_id
-  security_group_ids      = [aws_security_group.this.id]
-  spot_instances_policy   = var.spot_instances_policy
-  subnet_ids              = var.subnet_ids
-  user_data               = var.user_data
+  ami_pipeline                = var.ami_pipeline
+  associate_public_ip_address = var.associate_public_ip_address
+  image_id                    = var.image_id
+  instance_profile_arn        = module.instance_profile.profile_arn
+  instance_types              = var.instance_types
+  max_size                    = var.max_size
+  min_size                    = 0 # ECS capacity provider auto scaling will scale up from zero
+  name                        = local.asg_name
+  pipeline_target_name        = var.pipeline_target_name
+  pipeline_auto_deploy        = var.pipeline_auto_deploy
+  pipeline_aws_account_id     = var.pipeline_aws_account_id
+  security_group_ids          = [aws_security_group.this.id]
+  spot_instances_policy       = var.spot_instances_policy
+  subnet_ids                  = var.subnet_ids
+  user_data                   = var.user_data
 
   lifecycle_hooks = [
     {
