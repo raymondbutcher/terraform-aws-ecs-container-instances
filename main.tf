@@ -63,7 +63,7 @@ module "asg" {
 }
 
 resource "aws_ecs_capacity_provider" "asg" {
-  name = module.asg.asg_name
+  name = replace(upper("CUSTOM_${module.asg.asg_name}"), "-", "_")
 
   auto_scaling_group_provider {
     auto_scaling_group_arn         = module.asg.asg_arn
