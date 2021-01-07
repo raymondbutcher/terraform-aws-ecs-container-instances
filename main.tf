@@ -1,7 +1,7 @@
 module "instance_profile" {
   source = "git::https://gitlab.com/claranet-pcp/terraform/aws/tf-aws-iam-instance-profile.git?ref=v6.0.0"
 
-  name = "${var.cluster_name}-ec2"
+  name = "${local.asg_name}-ec2"
 
   aws_policies        = ["service-role/AmazonEC2ContainerServiceforEC2Role"]
   ssm_managed         = true
@@ -9,7 +9,7 @@ module "instance_profile" {
 }
 
 resource "aws_security_group" "this" {
-  name   = "${var.cluster_name}-ec2"
+  name   = "${local.asg_name}-ec2"
   vpc_id = var.vpc_id
 }
 

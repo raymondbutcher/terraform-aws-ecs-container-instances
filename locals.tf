@@ -1,5 +1,5 @@
 locals {
-  asg_name = var.cluster_name
+  asg_name = coalesce(var.asg_name, var.cluster_name)
 
   asg_hook_boot  = "boot"
   asg_hook_drain = "drain"

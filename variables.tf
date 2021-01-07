@@ -21,6 +21,12 @@ variable "ami_pipeline" {
   default     = false
 }
 
+variable "asg_name" {
+  description = "The name to use when creating the auto scaling group. Defaults to the cluster name."
+  type        = string
+  default     = null
+}
+
 variable "boot_timeout_seconds" {
   description = "The time allowed for instances to boot before giving up."
   type        = number
