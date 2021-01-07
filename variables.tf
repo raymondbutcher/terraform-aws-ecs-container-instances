@@ -36,8 +36,12 @@ variable "drain_timeout_seconds" {
   default = 60 * 60
 }
 
-variable "instance_type" {
-  type = string
+variable "instance_types" {
+  description = "The instance types to use and their weights. Set weight to 1 if there is only one instance type. See https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-weighting.html"
+  type        = list(object({
+    type   = string
+    weight = number
+  }))
 }
 
 variable "max_size" {
@@ -54,6 +58,12 @@ variable "pipeline_aws_account_id" {
 
 variable "pipeline_target_name" {
   type = string
+}
+
+variable "spot_instances_policy" {
+  description = "Customise spot instances behaviour by setting any of OnDemandAllocationStrategy, OnDemandBaseCapacity, OnDemandPercentageAboveBaseCapacity, SpotAllocationStrategy, SpotInstancePools, SpotMaxPrice from https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-autoscaling-autoscalinggroup-instancesdistribution.html"
+  type        = map(string)
+  default     = {}
 }
 
 variable "subnet_ids" {

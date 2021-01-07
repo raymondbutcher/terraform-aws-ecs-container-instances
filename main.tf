@@ -23,13 +23,13 @@ resource "aws_security_group_rule" "egress" {
 }
 
 module "asg" {
-  source = "github.com/claranet/terraform-aws-asg-pipeline//modules/asg?ref=v2.0.0"
+  source = "github.com/raymondbutcher/terraform-aws-asg-pipeline//modules/asg?ref=spot"
 
   depends_on = [module.boot_instances, module.drain_instances]
 
   ami_pipeline            = true
   instance_profile_arn    = module.instance_profile.profile_arn
-  instance_type           = var.instance_type
+  instance_types          = var.instance_types
   max_size                = var.max_size
   min_size                = 0 # ECS capacity provider auto scaling will scale up from zero
   name                    = local.asg_name
@@ -37,6 +37,7 @@ module "asg" {
   pipeline_auto_deploy    = var.pipeline_auto_deploy
   pipeline_aws_account_id = var.pipeline_aws_account_id
   security_group_ids      = [aws_security_group.this.id]
+  spot_instances_policy   = var.spot_instances_policy
   subnet_ids              = var.subnet_ids
   user_data               = var.user_data
 
